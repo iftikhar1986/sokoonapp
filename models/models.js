@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 var db = require("../connection/connection");
 
-const admins = db.connection.define("admins", {
+const admins = db.connection.define('admins', {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -349,7 +349,7 @@ const userGuides = db.connection.define("userGuides", {
   updated_at: Sequelize.DATE,
 });
 
-const users = db.connection.define("users", {
+const users = db.connection.define('users', {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -372,7 +372,7 @@ const users = db.connection.define("users", {
   updated_at: Sequelize.DATE,
 });
 
-const words = db.connection.define("words", {
+const words = db.connection.define('words', {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -395,7 +395,7 @@ const words = db.connection.define("words", {
     updated_at: Sequelize.DATE,
 });
 
-const words2 = db.connection.define("words2", {
+const words2 = db.connection.define('words2', {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -416,7 +416,7 @@ const words2 = db.connection.define("words2", {
     updated_at: Sequelize.DATE,
 });
 
-const words3 = db.connection.define("words3", {
+const words3 = db.connection.define('words3', {
   id: {
     allowNull: false,
     autoIncrement: true,

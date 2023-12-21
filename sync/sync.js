@@ -248,28 +248,28 @@ function wordssync() {
 }
 
  function syncc(){
-     adminssync()
-    adssync()
+    //  adminssync()
+    // adssync()
     //Sync Tables
   
 
-citiessync()
-statessync()
-countriessync()
-adssync()
-categoriessync()
-guidessync()
-feedbackssync()
-newWordssync()
-notificationssync()
-sentencessync()
-settingssync()
-signssync()
-storiessync()
-userGuidessync()
-updateWordssync()
-userssync()
-wordssync()
+// citiessync()
+// statessync()
+// countriessync()
+// adssync()
+// categoriessync()
+// guidessync()
+// feedbackssync()
+// newWordssync()
+// notificationssync()
+// sentencessync()
+// settingssync()
+// signssync()
+// storiessync()
+// userGuidessync()
+// updateWordssync()
+// userssync()
+// wordssync()
  };
  syncc();
 
