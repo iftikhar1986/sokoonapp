@@ -14,8 +14,8 @@ const connection = new Sequelize(
       timestamps: false, //turnoff timestapm
     },
     pool: {
-      max: 3,
-      min: 1,
+      max: 2,
+      min: 0,
       idle: 10000,
     },
   }

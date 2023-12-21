@@ -24,7 +24,14 @@ const admins = db.connection.define("admins", {
   is_active: Sequelize.BOOLEAN,
   created_at: Sequelize.DATE,
   updated_at: Sequelize.DATE,
-});
+},
+{
+  // disable the modification of table names; By default, sequelize will automatically
+  // transform all passed model names (first parameter of define) into plural.
+  // if you don't want that, set the following
+  freezeTableName: true,
+}
+);
 
 const cities = db.connection.define("cities", {
   name: Sequelize.STRING(255),
