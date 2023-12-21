@@ -60,8 +60,8 @@ Connection.connection
   .authenticate()
   .then(() => {
     console.log("Database connected...");
-    server.listen(process.env.PORT || 8080, () =>
-      console.log(`server is listening at port ${process.env.PORT || 8080}`)
+    server.listen(process.env.PORT || 80, () =>
+      console.log(`server is listening at port ${process.env.PORT || 80}`)
     );
   })
   .catch((err) => {
