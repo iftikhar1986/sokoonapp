@@ -117,7 +117,7 @@ const feedbacks = db.connection.define("feedbacks", {
   feedback: Sequelize.STRING,
   reference: Sequelize.STRING,
   string: Sequelize.STRING,
-  provided: Sequelize.STRING,
+  provided: Sequelize.BOOLEAN,
   isRead: Sequelize.BOOLEAN,
   created_at: Sequelize.DATE,
   updated_at: Sequelize.DATE,
