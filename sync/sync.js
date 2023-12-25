@@ -248,37 +248,34 @@ function wordssync() {
 }
 
  function syncc(){
-    //  adminssync()
-    // adssync()
-    //Sync Tables
-  
-
-// citiessync()
-// statessync()
-// countriessync()
-// adssync()
-// categoriessync()
-// guidessync()
-// feedbackssync()
-// newWordssync()
-// notificationssync()
-// sentencessync()
-// settingssync()
-// signssync()
-// storiessync()
-// userGuidessync()
-// updateWordssync()
-// userssync()
-// wordssync()
+   allsync
+//    adminssync;
+//    citiessync;
+//    statessync;
+//    countriessync;
+//    adssync;
+//    categoriessync;
+//    guidessync;
+//    feedbackssync;
+//    newWordssync;
+//    notificationssync;
+//    sentencessync;
+//    settingssync;
+//    signssync;
+//    storiessync;
+//    userGuidessync;
+//    updateWordssync;
+//    userssync;
+//    wordssync;
  };
  syncc();
 
 //Sync Tables
-module.exports.allsync=allsync
-module.exports.adminssync=adminssync
-module.exports.citiessync=citiessync
-module.exports.statessync=statessync
-module.exports.countriessync=countriessync
+module.exports.allsync=allsync;
+module.exports.adminssync=adminssync;
+module.exports.citiessync=citiessync;
+module.exports.statessync=statessync;
+module.exports.countriessync=countriessync;
 module.exports.adssync=adssync;
 module.exports.categoriessync=categoriessync;
 module.exports.guidessync=guidessync;

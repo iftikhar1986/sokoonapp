@@ -60,8 +60,8 @@ Connection.connection
   .authenticate()
   .then(() => {
     console.log("Database connected...");
-    server.listen(process.env.PORT || 80, () =>
-      console.log(`server is listening at port ${process.env.PORT || 80}`)
+    server.listen(process.env.PORT || 8080, () =>
+      console.log(`server is listening at port ${process.env.PORT || 8080}`)
     );
   })
   .catch((err) => {
@@ -96,7 +96,7 @@ app.use("/error", (req, res, next) => {
 
 //Routes
 const adminRoutes = require("./routes/admins");
-const locationsRoutes = require("./routes/locations");
+// const locationsRoutes = require("./routes/locations");
 const adRoutes = require("./routes/ads");
 const categoriesRoutes = require("./routes/categories");
 const feedbacksRoutes = require("./routes/feedbacks");
@@ -114,7 +114,7 @@ const wordsRoutes = require("./routes/words");
 
 
 app.use("/admins", adminRoutes);
-app.use("/locations", locationsRoutes);
+// app.use("/locations", locationsRoutes);
 app.use("/ads", adRoutes);
 app.use("/categories", categoriesRoutes);
 app.use("/feedbacks", feedbacksRoutes);

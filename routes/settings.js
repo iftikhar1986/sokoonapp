@@ -50,7 +50,7 @@ router.get("/Get_SingleSetting/:stg_id", (req, res, next) => {
 router.get("/Get_AllSettings", (req, res, next) => {
     models.settings
         .findAll({
-            order: [["created_at", "DESC"]],
+            
         })
         .then((data) => {
             if (data?.length > 0) {
@@ -79,18 +79,22 @@ router.get("/Get_AllSettings", (req, res, next) => {
 
 //Create Setting
 router.post("/Create_Setting", async (req, res, next) => {
-    const { is_active } = req.body.data;
+    const { titleEn, titleAr, titleFr, descriptionAr, descriptionEn, descriptionFr, is_active } = req.body.data;
 
     values = [
-        {
-            is_active: req.body.is_active,
-            created_at: new Date().toISOString(),
+        {    
+            titleFr: req.body.titleFr,
+            titleAr: req.body.titleAr,
+            titleEn: req.body.titleEn,
+            descriptionFr: req.body.descriptionFr,
+            descriptionEn: req.body.descriptionEn,
+            descriptionAr: req.body.descriptionAr,
         },
     ];
     await models.settings
         .findAll({
             where: {
-                url: values[0].url,
+                titleAr: values[0].titleAr,
             },
         })
         .then((data) => {
@@ -144,13 +148,24 @@ router.post("/Update_SettingDetail", async (req, res, next) => {
     values = [
         {
             id: req.body.data.id,
-            is_active: req.body.data.is_active,
+            titleFr: req.body.data.titleFr,
+            titleAr: req.body.data.titleAr,
+            titleEn: req.body.data.titleEn,
+            descriptionFr: req.body.data.descriptionFr,
+            descriptionEn: req.body.data.descriptionEn,
+            descriptionAr: req.body.data.descriptionAr,
+            
         },
     ];
     await models.settings
         .update(
             {
-                is_active: values[0].is_active,
+                titleFr: values[0].titleFr,
+                titleAr: values[0].titleAr,
+                titleEn: values[0].titleEn,
+                descriptionFr: values[0].descriptionFr,
+                descriptionEn: values[0].descriptionEn,
+                descriptionAr: values[0].descriptionAr,
                 updated_at: new Date().toISOString(),
             },
             {
@@ -188,58 +203,6 @@ router.post("/Update_SettingDetail", async (req, res, next) => {
         });
 });
 
-//Update Setting Status
-router.post("/Update_SettingStatus", async (req, res, next) => {
-    console.log("Update Setting Status API calling", req.body.data);
-    values = [
-        {
-            id: req.body.data.id,
-            status: req.body.data.status,
-        },
-    ];
-    await models.settings
-        .update(
-            {
-                is_active: values[0].status,
-                updated_at: new Date().toISOString(),
-            },
-            {
-                where: {
-                    id: values[0].id,
-                },
-                returning: true,
-                exclude: ["created_at", "updated_at"],
-            }
-        )
-        .then((data) => {
-            const val = {
-                id: values[0].id,
-                is_active: values[0].status,
-            };
-            const accessToken = jwt.sign(
-                {
-                    successful: true,
-                    message: "Setting Status Updated Successfully",
-                    data: val,
-                },
-                accessTokenSecret
-            );
-            console.log("val", val);
-            res.json({
-                successful: true,
-                message: "Successful",
-                data: val,
-                accessToken,
-            });
-        })
-        .catch(function (err) {
-            console.log(err);
-            res.json({
-                message: "Failed" + err,
-                successful: false,
-            });
-        });
-});
 
 //Update Setting Pic
 router.post("/Update_SettingPic", async (req, res, next) => {

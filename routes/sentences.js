@@ -165,7 +165,6 @@ router.post("/Update_SentenceDetail", async (req, res, next) => {
             videoUrl: req.body.data.videoUrl,
             thumbnail: req.body.data.thumbnail,
             is_active: req.body.data.is_active,
-            is_active: req.body.data.data.is_active,
         },
     ];
     await models.sentences

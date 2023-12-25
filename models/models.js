@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 var db = require("../connection/connection");
 
-const admins = db.connection.define('admins', {
+const admins = db.connection.define("admins", {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -24,14 +24,7 @@ const admins = db.connection.define('admins', {
   is_active: Sequelize.BOOLEAN,
   created_at: Sequelize.DATE,
   updated_at: Sequelize.DATE,
-},
-{
-  // disable the modification of table names; By default, sequelize will automatically
-  // transform all passed model names (first parameter of define) into plural.
-  // if you don't want that, set the following
-  freezeTableName: true,
-}
-);
+});
 
 const cities = db.connection.define("cities", {
   name: Sequelize.STRING(255),
@@ -73,31 +66,31 @@ const ads = db.connection.define("ads", {
   updated_at: Sequelize.DATE,
 });
 
-const catArAZs = db.connection.define("catArAZs", {
-  id: {
-    allowNull: false,
-    autoIncrement: true,
-    primaryKey: true,
-    type: Sequelize.INTEGER,
-  },
-  cat: Sequelize.STRING,
-  is_active: Sequelize.BOOLEAN,
-  created_at: Sequelize.DATE,
-  updated_at: Sequelize.DATE,
-});
+// const catArAZs = db.connection.define("catArAZs", {
+//   id: {
+//     allowNull: false,
+//     autoIncrement: true,
+//     primaryKey: true,
+//     type: Sequelize.INTEGER,
+//   },
+//   cat: Sequelize.STRING,
+//   is_active: Sequelize.BOOLEAN,
+//   created_at: Sequelize.DATE,
+//   updated_at: Sequelize.DATE,
+// });
 
-const catAZs = db.connection.define("catAZs", {
-  id: {
-    allowNull: false,
-    autoIncrement: true,
-    primaryKey: true,
-    type: Sequelize.INTEGER,
-  },
-  cat: Sequelize.STRING,
-  is_active: Sequelize.BOOLEAN,
-  created_at: Sequelize.DATE,
-  updated_at: Sequelize.DATE,
-});
+// const catAZs = db.connection.define("catAZs", {
+//   id: {
+//     allowNull: false,
+//     autoIncrement: true,
+//     primaryKey: true,
+//     type: Sequelize.INTEGER,
+//   },
+//   cat: Sequelize.STRING,
+//   is_active: Sequelize.BOOLEAN,
+//   created_at: Sequelize.DATE,
+//   updated_at: Sequelize.DATE,
+// });
 
 const categories = db.connection.define("categories", {
   id: {
@@ -147,6 +140,8 @@ const guides = db.connection.define("guides", {
   },
   pdfUrlAr: Sequelize.STRING,
   pdfUrlEn: Sequelize.STRING,
+  imageEn: Sequelize.STRING,
+  imageAr: Sequelize.STRING,
   is_active: Sequelize.BOOLEAN,
   created_at: Sequelize.DATE,
   updated_at: Sequelize.DATE,
@@ -210,60 +205,63 @@ const sentences = db.connection.define("sentences", {
   updated_at: Sequelize.DATE,
 });
 
-const sentences2 = db.connection.define("sentences2", {
+// const sentences2 = db.connection.define("sentences2", {
+//   id: {
+//     allowNull: false,
+//     autoIncrement: true,
+//     primaryKey: true,
+//     type: Sequelize.INTEGER,
+//   },
+//   catAZAr: Sequelize.STRING,
+//   idWord: Sequelize.STRING,
+//   arabic: Sequelize.STRING,
+//   english: Sequelize.STRING,
+//   catAZEn: Sequelize.STRING,
+//   catAZFr: Sequelize.STRING,
+//   video: Sequelize.STRING,
+//   french: Sequelize.STRING,
+//   is_active: Sequelize.BOOLEAN,
+//   created_at: Sequelize.DATE,
+//   updated_at: Sequelize.DATE,
+// });
+
+// const sentences3 = db.connection.define("sentences3", {
+//   id: {
+//     allowNull: false,
+//     autoIncrement: true,
+//     primaryKey: true,
+//     type: Sequelize.INTEGER,
+//   },
+//   catAZAr: Sequelize.STRING,
+//   idWord: Sequelize.STRING,
+//   arabic: Sequelize.STRING,
+//   english: Sequelize.STRING,
+//   catAZEn: Sequelize.STRING,
+//   catAZFr: Sequelize.STRING,
+//   video: Sequelize.STRING,
+//   french: Sequelize.STRING,
+//   videoUrl: Sequelize.STRING,
+//   videoUrlMobile: Sequelize.STRING,
+//   thumbnail: Sequelize.STRING,
+//   is_active: Sequelize.BOOLEAN,
+//   created_at: Sequelize.DATE,
+//   updated_at: Sequelize.DATE,
+// });
+
+
+const settings = db.connection.define("sokoonDescription", {
   id: {
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
     type: Sequelize.INTEGER,
   },
-  catAZAr: Sequelize.STRING,
-  idWord: Sequelize.STRING,
-  arabic: Sequelize.STRING,
-  english: Sequelize.STRING,
-  catAZEn: Sequelize.STRING,
-  catAZFr: Sequelize.STRING,
-  video: Sequelize.STRING,
-  french: Sequelize.STRING,
-  is_active: Sequelize.BOOLEAN,
-  created_at: Sequelize.DATE,
-  updated_at: Sequelize.DATE,
-});
-
-const sentences3 = db.connection.define("sentences3", {
-  id: {
-    allowNull: false,
-    autoIncrement: true,
-    primaryKey: true,
-    type: Sequelize.INTEGER,
-  },
-  catAZAr: Sequelize.STRING,
-  idWord: Sequelize.STRING,
-  arabic: Sequelize.STRING,
-  english: Sequelize.STRING,
-  catAZEn: Sequelize.STRING,
-  catAZFr: Sequelize.STRING,
-  video: Sequelize.STRING,
-  french: Sequelize.STRING,
-  videoUrl: Sequelize.STRING,
-  videoUrlMobile: Sequelize.STRING,
-  thumbnail: Sequelize.STRING,
-  is_active: Sequelize.BOOLEAN,
-  created_at: Sequelize.DATE,
-  updated_at: Sequelize.DATE,
-});
-
-
-const settings = db.connection.define("settings", {
-  id: {
-    allowNull: false,
-    autoIncrement: true,
-    primaryKey: true,
-    type: Sequelize.INTEGER,
-  },
-
-  is_active: Sequelize.BOOLEAN,
-  created_at: Sequelize.DATE,
+  titleFr: Sequelize.STRING,
+  titleAr: Sequelize.STRING,
+  titleEn: Sequelize.STRING,
+  descriptionFr: Sequelize.STRING,
+  descriptionEn: Sequelize.STRING,
+  descriptionAr: Sequelize.STRING,
   updated_at: Sequelize.DATE,
 });
 
@@ -289,7 +287,7 @@ const stories = db.connection.define("stories", {
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
-    type: Sequelize.STRING,
+    type: Sequelize.BIGINT,
   },
   titleFr: Sequelize.STRING,
   titleEn: Sequelize.STRING,
@@ -303,21 +301,21 @@ const stories = db.connection.define("stories", {
   updated_at: Sequelize.DATE,
 });
 
-const storiesOrders = db.connection.define("storiesOrders", {
-  id: {
-    allowNull: false,
-    autoIncrement: true,
-    primaryKey: true,
-    type: Sequelize.STRING,
-  },
-  titleFr: Sequelize.STRING,
-  titleEn: Sequelize.STRING,
-  titleAr: Sequelize.STRING,
-  orderBy: Sequelize.STRING,
-  is_active: Sequelize.BOOLEAN,
-  created_at: Sequelize.DATE,
-  updated_at: Sequelize.DATE,
-});
+// const storiesOrders = db.connection.define("storiesOrders", {
+//   id: {
+//     allowNull: false,
+//     autoIncrement: true,
+//     primaryKey: true,
+//     type: Sequelize.STRING,
+//   },
+//   titleFr: Sequelize.STRING,
+//   titleEn: Sequelize.STRING,
+//   titleAr: Sequelize.STRING,
+//   orderBy: Sequelize.STRING,
+//   is_active: Sequelize.BOOLEAN,
+//   created_at: Sequelize.DATE,
+//   updated_at: Sequelize.DATE,
+// });
 
 const updateWords = db.connection.define("updateWords", {
   id: {
@@ -349,7 +347,7 @@ const userGuides = db.connection.define("userGuides", {
   updated_at: Sequelize.DATE,
 });
 
-const users = db.connection.define('users', {
+const users = db.connection.define("users", {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -372,7 +370,7 @@ const users = db.connection.define('users', {
   updated_at: Sequelize.DATE,
 });
 
-const words = db.connection.define('words', {
+const words = db.connection.define("words", {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -395,50 +393,50 @@ const words = db.connection.define('words', {
     updated_at: Sequelize.DATE,
 });
 
-const words2 = db.connection.define('words2', {
-  id: {
-    allowNull: false,
-    autoIncrement: true,
-    primaryKey: true,
-    type: Sequelize.INTEGER,
-  },
-    catAZAr : Sequelize.STRING,
-    idWord : Sequelize.STRING,
-    arabic : Sequelize.STRING,
-    english : Sequelize.STRING,
-    catAZEn : Sequelize.STRING,
-    catAZFr : Sequelize.STRING,
-    video : Sequelize.STRING,
-    categories: Sequelize.JSON,
-    french : Sequelize.STRING,
-    is_active: Sequelize.BOOLEAN,
-    created_at: Sequelize.DATE,
-    updated_at: Sequelize.DATE,
-});
+// const words2 = db.connection.define("words2", {
+//   id: {
+//     allowNull: false,
+//     autoIncrement: true,
+//     primaryKey: true,
+//     type: Sequelize.INTEGER,
+//   },
+//     catAZAr : Sequelize.STRING,
+//     idWord : Sequelize.STRING,
+//     arabic : Sequelize.STRING,
+//     english : Sequelize.STRING,
+//     catAZEn : Sequelize.STRING,
+//     catAZFr : Sequelize.STRING,
+//     video : Sequelize.STRING,
+//     categories: Sequelize.JSON,
+//     french : Sequelize.STRING,
+//     is_active: Sequelize.BOOLEAN,
+//     created_at: Sequelize.DATE,
+//     updated_at: Sequelize.DATE,
+// });
 
-const words3 = db.connection.define('words3', {
-  id: {
-    allowNull: false,
-    autoIncrement: true,
-    primaryKey: true,
-    type: Sequelize.INTEGER,
-  },
-    catAZAr : Sequelize.STRING,
-    idWord : Sequelize.STRING,
-    arabic : Sequelize.STRING,
-    english : Sequelize.STRING,
-    catAZEn : Sequelize.STRING,
-    catAZFr : Sequelize.STRING,
-    video : Sequelize.STRING,
-    categories: Sequelize.JSON,
-    french : Sequelize.STRING,
-    videoUrl : Sequelize.STRING,
-    videoUrlMobile : Sequelize.STRING,
-    thumbnail : Sequelize.STRING,
-    is_active: Sequelize.BOOLEAN,
-    created_at: Sequelize.DATE,
-    updated_at: Sequelize.DATE,
-});
+// const words3 = db.connection.define("words3", {
+//   id: {
+//     allowNull: false,
+//     autoIncrement: true,
+//     primaryKey: true,
+//     type: Sequelize.INTEGER,
+//   },
+//     catAZAr : Sequelize.STRING,
+//     idWord : Sequelize.STRING,
+//     arabic : Sequelize.STRING,
+//     english : Sequelize.STRING,
+//     catAZEn : Sequelize.STRING,
+//     catAZFr : Sequelize.STRING,
+//     video : Sequelize.STRING,
+//     categories: Sequelize.JSON,
+//     french : Sequelize.STRING,
+//     videoUrl : Sequelize.STRING,
+//     videoUrlMobile : Sequelize.STRING,
+//     thumbnail : Sequelize.STRING,
+//     is_active: Sequelize.BOOLEAN,
+//     created_at: Sequelize.DATE,
+//     updated_at: Sequelize.DATE,
+// });
 
 cities.hasMany(admins, {
   foreignKey: {
@@ -491,23 +489,23 @@ module.exports.states = states;
 module.exports.countries = countries;
 module.exports.social_profiles = social_profiles;
 module.exports.ads = ads;
-module.exports.catArAZs = catArAZs;
-module.exports.catAZs = catAZs;
+// module.exports.catArAZs = catArAZs;
+// module.exports.catAZs = catAZs;
 module.exports.categories = categories;
 module.exports.guides = guides;
 module.exports.newWords = newWords;
 module.exports.notifications = notifications;
 module.exports.feedbacks = feedbacks;
 module.exports.sentences = sentences;
-module.exports.sentences2 = sentences2;
-module.exports.sentences3 = sentences3;
+// module.exports.sentences2 = sentences2;
+// module.exports.sentences3 = sentences3;
 module.exports.settings = settings;
 module.exports.signs = signs;
 module.exports.stories = stories;
-module.exports.storiesOrders = storiesOrders;
+// module.exports.storiesOrders = storiesOrders;
 module.exports.updateWords = updateWords;
 module.exports.userGuides = userGuides;
 module.exports.users = users;
 module.exports.words = words;
-module.exports.words2 = words2;
-module.exports.words3 = words3;
+// module.exports.words2 = words2;
+// module.exports.words3 = words3;

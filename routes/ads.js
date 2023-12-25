@@ -118,7 +118,7 @@ router.post("/Create_Ad", async (req, res, next) => {
                             );
                             res.json({
                                 successful: true,
-                                message: "Unable to Create New Ads",
+                                message: "Ad Created Successfully",
                                 data: x[0].id,
                             });
                         }
@@ -333,7 +333,7 @@ router.get("/Delete_SingleAd/:id", (req, res, next) => {
         },
       })
       .then((data) => {
-        if (data?.length > 0) {
+        if (data?.length !==  0) {
           console.log("Ad Deleted Successfully.");
           res.json({
             data: data,

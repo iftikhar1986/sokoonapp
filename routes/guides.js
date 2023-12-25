@@ -7,6 +7,7 @@ const jwt = require("jsonwebtoken");
 const {
     accessTokenSecret,
 } = require("../config");
+const multer = require("multer");
 
 //Get Single Guide
 router.get("/Get_SingleGuide/:g_id", (req, res, next) => {
@@ -78,12 +79,14 @@ router.get("/Get_AllGuides", (req, res, next) => {
 
 //Create  guide
 router.post("/Create_Guide", async (req, res, next) => {
-    const {pdfUrlAr, pdfUrlEn, is_active } = req.body.data;
+    const {pdfUrlAr, pdfUrlEn, imageEn, imageAr, is_active } = req.body.data;
 
     values = [
         {
             pdfUrlAr: req.body.pdfUrlAr,
             pdfUrlEn: req.body.pdfUrlAr,
+            imageAr: req.body.imageEn,
+            imageEn: req.body.imageEn,
             is_active: req.body.is_active,
             created_at: new Date().toISOString(),
         },
@@ -147,6 +150,8 @@ router.post("/Update_GuideDetail", async (req, res, next) => {
             id: req.body.data.id,
             pdfUrlAr: req.body.data.pdfUrlAr,
             pdfUrlEn: req.body.data.pdfUrlAr,
+            imageEn: req.body.data.imageEn,
+            imageAr: req.body.data.imageAr,
             is_active: req.body.data.is_active,
         },
     ];
@@ -155,6 +160,8 @@ router.post("/Update_GuideDetail", async (req, res, next) => {
             {
                 pdfUrlAr: values[0].pdfUrlAr,
                 pdfUrlEn: values[0].pdfUrlAr,
+                imageEn: values[0].imageEn,
+                imageAr: values[0].imageAr,
                 is_active: values[0].is_active,
                 updated_at: new Date().toISOString(),
             },
@@ -281,5 +288,141 @@ router.get("/Delete_SingleGuide/:id", (req, res, next) => {
       });
   });
 
+//Update Guide En Pic
+router.post("/Update_GuidepdfUrlEn", async (req, res, next) => {
+    console.log("Update Guide En Pic API Calling", req.body.data);
+   
+    values = [
+        {
+            id: req.body.data.id,
+            imageEn: req.body.data.imageEn,
+        },
+    ];
+    await models.guides
+        .update(
+            {
+                imageEn: values[0].imageEn,
+                updated_at: new Date().toISOString(),
+            },
+            {
+                where: {
+                    id: values[0].id,
+                },
+                returning: true,
+                plain: true,
+                exclude: ["created_at", "updated_at"],
+            }
+        )
+        .then((data) => {
+            const accessToken = jwt.sign(
+                {
+                    successful: true,
+                    message: "Sentence Pic Updated Successfully",
+                    data: data[1].dataValues,
+                },
+                accessTokenSecret
+            );
+            res.json({
+                successful: true,
+                message: "Successful",
+                data: data[1].dataValues,
+                accessToken,
+            });
+        })
+        .catch(function (err) {
+            console.log(err);
+            res.json({
+                message: "Failed" + err,
+                successful: false,
+            });
+        });
+});
 
+//Update Guide Ar Pic
+router.post("/Update_GuidepdfUrlAr", async (req, res, next) => {
+    console.log("Update Guide Ar Pic API Calling", req.body.data);
+   
+    values = [
+        {
+            id: req.body.data.id,
+            imageAr: req.body.data.imageAr,
+        },
+    ];
+    await models.guides
+        .update(
+            {
+                imageAr: values[0].imageAr,
+                updated_at: new Date().toISOString(),
+            },
+            {
+                where: {
+                    id: values[0].id,
+                },
+                returning: true,
+                plain: true,
+                exclude: ["created_at", "updated_at"],
+            }
+        )
+        .then((data) => {
+            const accessToken = jwt.sign(
+                {
+                    successful: true,
+                    message: "Sentence Pic Updated Successfully",
+                    data: data[1].dataValues,
+                },
+                accessTokenSecret
+            );
+            res.json({
+                successful: true,
+                message: "Successful",
+                data: data[1].dataValues,
+                accessToken,
+            });
+        })
+        .catch(function (err) {
+            console.log(err);
+            res.json({
+                message: "Failed" + err,
+                successful: false,
+            });
+        });
+});
+
+//Setup Storage Folder
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, "./GuidesImages");
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname);
+    },
+});
+
+//Upload Guide En Pic
+var upload = multer({ storage: storage }).single("file");
+router.post("/GuidepdfUrlEn", function (req, res) {
+    console.log("Req:", req);
+    upload(req, res, function (err) {
+        if (err instanceof multer.MulterError) {
+            return res.json(err);
+        } else if (err) {
+            return res.json(err);
+        }
+        return res.send(req.file);
+    });
+});
+
+//Upload Guide Ar Pic
+var upload = multer({ storage: storage }).single("file");
+router.post("/GuidepdfUrlAr", function (req, res) {
+    console.log("Req:", req);
+    upload(req, res, function (err) {
+        if (err instanceof multer.MulterError) {
+            return res.json(err);
+        } else if (err) {
+            return res.json(err);
+        }
+        return res.send(req.file);
+    });
+});
 module.exports = router;
