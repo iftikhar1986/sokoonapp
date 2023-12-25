@@ -57,6 +57,7 @@ router.get("/Get_AllUsers", (req, res, next) => {
                 console.log("Get All Users Successfully");
                 res.json({
                     data: data,
+		    datacount: data.length,
                     successful: true,
                     message: "Get All Users Successfully",
                 });

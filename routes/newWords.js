@@ -56,6 +56,7 @@ router.get("/Get_AllNewWords", (req, res, next) => {
                 console.log("Get All New Words Successfully");
                 res.json({
                     data: data,
+	            datacount: data.length,
                     successful: true,
                     message: "Get All New Words Successfully",
                 });

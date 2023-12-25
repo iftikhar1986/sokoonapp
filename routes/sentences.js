@@ -57,6 +57,7 @@ router.get("/Get_AllSentences", (req, res, next) => {
                 console.log("Get All Sentences Successfully");
                 res.json({
                     data: data,
+		    datacount: data.length,
                     successful: true,
                     message: "Get All Sentences Successfully",
                 });
