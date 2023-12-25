@@ -80,10 +80,10 @@ router.post("/Create_Category", async (req, res, next) => {
     const {categorieAr, categorieEn, categorieFr, is_active } = req.body.data;
     values = [
         {
-            categorieEn: req.body.categorieEn,
-            categorieFr: req.body.categorieFr,
-            categorieAr: req.body.categorieAr,
-            is_active: req.body.is_active,
+            categorieEn: req.body.data.categorieEn,
+            categorieFr: req.body.data.categorieFr,
+            categorieAr: req.body.data.categorieAr,
+            is_active: req.body.data.is_active,
             created_at: new Date().toISOString(),
         },
     ];
