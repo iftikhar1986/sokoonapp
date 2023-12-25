@@ -79,7 +79,7 @@ router.get("/Get_AllSentences", (req, res, next) => {
 
 //Create Sentence
 router.post("/Create_Sentence", async (req, res, next) => {
-    const { catAZAr, idWord, arabic, english, catAZEn, catAZFr, video, french, videoUrl, thumbnail, is_active } = req.body.data;
+    const { catAZAr, idWord, arabic, english, catAZEn, catAZFr, french, videoUrl, thumbnail, is_active } = req.body.data;
 
     values = [
         {
@@ -89,7 +89,7 @@ router.post("/Create_Sentence", async (req, res, next) => {
             english: req.body.english,
             catAZEn: req.body.catAZEn,
             catAZFr: req.body.catAZFr,
-            video: req.body.video,
+	    video: req.body.data.video,
             french: req.body.french,
             videoUrl: req.body.videoUrl,
             thumbnail: req.body.thumbnail,
@@ -160,7 +160,7 @@ router.post("/Update_SentenceDetail", async (req, res, next) => {
             english: req.body.data.english,
             catAZEn: req.body.data.catAZEn,
             catAZFr: req.body.data.catAZFr,
-            video: req.body.data.video,
+	    video: req.body.data.video,
             french: req.body.data.french,
             videoUrl: req.body.data.videoUrl,
             thumbnail: req.body.data.thumbnail,
