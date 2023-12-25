@@ -90,7 +90,7 @@ router.post("/Create_Category", async (req, res, next) => {
     await models.categories
         .findAll({
             where: {
-                categprieEn: values[0].categprieEn,
+                categorieEn: values[0].categorieEn,
             },
         })
         .then((data) => {
