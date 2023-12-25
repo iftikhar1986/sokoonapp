@@ -115,7 +115,7 @@ router.post("/Create_Word", async (req, res, next) => {
     await models.words
         .findAll({
             where: {
-                idWord: values[0].idWord,
+                english: values[0].english,
             },
         })
         .then((data) => {
