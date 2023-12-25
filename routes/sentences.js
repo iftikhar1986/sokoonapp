@@ -57,7 +57,6 @@ router.get("/Get_AllSentences", (req, res, next) => {
                 console.log("Get All Sentences Successfully");
                 res.json({
                     data: data,
-		    datacount: data.length,
                     successful: true,
                     message: "Get All Sentences Successfully",
                 });
@@ -80,21 +79,21 @@ router.get("/Get_AllSentences", (req, res, next) => {
 
 //Create Sentence
 router.post("/Create_Sentence", async (req, res, next) => {
-    const { catAZAr, idWord, arabic, english, catAZEn, catAZFr, french, videoUrl, thumbnail, is_active } = req.body.data;
+    const { catAZAr, idWord, arabic, english, catAZEn, catAZFr, video, french, videoUrl, thumbnail, is_active } = req.body.data;
 
     values = [
         {
-            catAZAr: req.body.catAZAr,
-            idWord: req.body.idWord,
-            arabic: req.body.arabic,
-            english: req.body.english,
-            catAZEn: req.body.catAZEn,
-            catAZFr: req.body.catAZFr,
-	    video: req.body.data.video,
-            french: req.body.french,
-            videoUrl: req.body.videoUrl,
-            thumbnail: req.body.thumbnail,
-            is_active: req.body.is_active,
+            catAZAr: req.body.data.catAZAr,
+            idWord: req.body.data.idWord,
+            arabic: req.body.data.arabic,
+            english: req.body.data.english,
+            catAZEn: req.body.data.catAZEn,
+            catAZFr: req.body.data.catAZFr,
+            video: req.body.data.video,
+            french: req.body.data.french,
+            videoUrl: req.body.data.videoUrl,
+            thumbnail: req.body.data.thumbnail,
+            is_active: req.body.data.is_active,
             created_at: new Date().toISOString(),
         },
     ];
@@ -161,7 +160,7 @@ router.post("/Update_SentenceDetail", async (req, res, next) => {
             english: req.body.data.english,
             catAZEn: req.body.data.catAZEn,
             catAZFr: req.body.data.catAZFr,
-	    video: req.body.data.video,
+            video: req.body.data.video,
             french: req.body.data.french,
             videoUrl: req.body.data.videoUrl,
             thumbnail: req.body.data.thumbnail,

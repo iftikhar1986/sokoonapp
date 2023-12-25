@@ -49,6 +49,7 @@ router.get("/Get_SingleFeedback/:fb_id", (req, res, next) => {
 router.get("/Get_AllFeedbacks", (req, res, next) => {
     models.feedbacks
         .findAll({
+            order: [["created_at", "DESC"]],
         })
         .then((data) => {
             if (data?.length > 0) {
@@ -79,25 +80,26 @@ router.get("/Get_AllFeedbacks", (req, res, next) => {
 router.post("/Create_Feedback", async (req, res, next) => {
     const { 
         feedback, 
+        timer,
         reference,
         string,
         provided,
-        isRead
+        isRead,
     } = req.body.data;
 
     values = [
         {
-            feedback: req.body.feedback,
-            reference: req.body.reference,
-            string: req.body.string,
-            provided: req.body.provided,
-            isRead: req.body.isRead,
+            feedback: req.body.data.feedback,
+            reference: req.body.data.reference,
+            string: req.body.data.string,
+            provided: req.body.data.provided,
+            isRead: req.body.data.isRead,
             created_at: new Date().toISOString(),
         },
     ];
     await models.feedbacks
         .findAll({
-
+ 
         })
         .then((data) => {
             if (data?.length !== 0) {
@@ -202,6 +204,58 @@ router.post("/Update_FeedbackDetail", async (req, res, next) => {
         });
 });
 
+//Update Feedback Status
+router.post("/Update_FeedbackStatus", async (req, res, next) => {
+    console.log("Update Feedback Status API calling", req.body.data);
+    values = [
+        {
+            id: req.body.data.id,
+            status: req.body.data.status,
+        },
+    ];
+    await models.feedbacks
+        .update(
+            {
+                is_active: values[0].status,
+                updated_at: new Date().toISOString(),
+            },
+            {
+                where: {
+                    id: values[0].id,
+                },
+                returning: true,
+                exclude: ["created_at", "updated_at"],
+            }
+        )
+        .then((data) => {
+            const val = {
+                id: values[0].id,
+                is_active: values[0].status,
+            };
+            const accessToken = jwt.sign(
+                {
+                    successful: true,
+                    message: "Feedback Status Updated Successfully",
+                    data: val,
+                },
+                accessTokenSecret
+            );
+            console.log("val", val);
+            res.json({
+                successful: true,
+                message: "Successful",
+                data: val,
+                accessToken,
+            });
+        })
+        .catch(function (err) {
+            console.log(err);
+            res.json({
+                message: "Failed" + err,
+                successful: false,
+            });
+        });
+});
 
 //Delete Single Feedback
 router.get("/Delete_SingleFeedback/:id", (req, res, next) => {

@@ -57,7 +57,6 @@ router.get("/Get_AllWords", (req, res, next) => {
                 console.log("Get All Words Successfully");
                 res.json({
                     data: data,
-		    datacount: data.length,
                     successful: true,
                     message: "Get All Words Successfully",
                 });

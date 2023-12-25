@@ -83,11 +83,11 @@ router.post("/Create_UserGuide", async (req, res, next) => {
 
     values = [
         {
-            language: req.body.language,
-            title: req.body.title,
-            picture: req.body.picture,
-            description: req.body.description,
-            is_active: req.body.is_active,
+            language: req.body.data.language,
+            title: req.body.data.title,
+            picture: req.body.data.picture,
+            description: req.body.data.description,
+            is_active: req.body.data.is_active,
             created_at: new Date().toISOString(),
         },
     ];

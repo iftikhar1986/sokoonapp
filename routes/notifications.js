@@ -82,16 +82,16 @@ router.post("/Create_Notification", async (req, res, next) => {
 
     values = [
         {
-            idWord: req.body.idWord,
-            messageAr: req.body.messageAr,
-            isRead: req.body.isRead,
-            messageEn: req.body.messageEn,
-            title: req.body.title,
-            body: req.body.body,
-            isWord: req.body.isWord,
-            time: req.body.time,
-            messageFr: req.body.messageFr,
-            is_active: req.body.is_active,
+            idWord: req.body.data.idWord,
+            messageAr: req.body.data.messageAr,
+            isRead: req.body.data.isRead,
+            messageEn: req.body.data.messageEn,
+            title: req.body.data.title,
+            body: req.body.data.body,
+            isWord: req.body.data.isWord,
+            time: req.body.data.time,
+            messageFr: req.body.data.messageFr,
+            is_active: req.body.data.is_active,
             created_at: new Date().toISOString(),
         },
     ];

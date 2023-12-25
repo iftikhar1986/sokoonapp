@@ -9,8 +9,7 @@ const {
 } = require("../config");
 const multer = require("multer");
 
-//Get Single Guide
-router.get("/Get_SingleGuide/:g_id", (req, res, next) => {
+//Get Single Guidesuide/:g_id", (req, res, next) => {
     const { g_id } = req.params;
 
     models.guides
@@ -83,11 +82,11 @@ router.post("/Create_Guide", async (req, res, next) => {
 
     values = [
         {
-            pdfUrlAr: req.body.pdfUrlAr,
-            pdfUrlEn: req.body.pdfUrlAr,
-            imageAr: req.body.imageEn,
-            imageEn: req.body.imageEn,
-            is_active: req.body.is_active,
+            pdfUrlAr: req.body.data.pdfUrlAr,
+            pdfUrlEn: req.body.data.pdfUrlAr,
+            imageAr: req.body.data.imageEn,
+            imageEn: req.body.data.imageEn,
+            is_active: req.body.data.is_active,
             created_at: new Date().toISOString(),
         },
     ];

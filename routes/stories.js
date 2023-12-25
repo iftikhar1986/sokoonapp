@@ -83,14 +83,14 @@ router.post("/Create_Story", async (req, res, next) => {
 
     values = [
         {
-            titleFr: req.body.titleFr,
-            titleAr: req.body.titleAr,
-            titleEn: req.body.titleEn,
-            type: req.body.type,
-            url: req.body.url,
-            thumbnail: req.body.thumbnail,
-            nbreOfView: req.body.nbreOfView,
-            is_active: req.body.is_active,
+            titleFr: req.body.data.titleFr,
+            titleAr: req.body.data.titleAr,
+            titleEn: req.body.data.titleEn,
+            type: req.body.data.type,
+            url: req.body.data.url,
+            thumbnail: req.body.data.thumbnail,
+            nbreOfView: req.body.data.nbreOfView,
+            is_active: req.body.data.is_active,
             created_at: new Date().toISOString(),
         },
     ];
