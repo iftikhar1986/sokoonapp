@@ -82,9 +82,7 @@ router.post("/Create_Feedback", async (req, res, next) => {
         reference,
         string,
         provided,
-        isRead,
-        
-        is_active 
+        isRead
     } = req.body.data;
 
     values = [
