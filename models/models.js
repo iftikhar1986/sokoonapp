@@ -115,7 +115,6 @@ const feedbacks = db.connection.define("feedbacks", {
     type: Sequelize.INTEGER,
   },
   feedback: Sequelize.STRING,
-  timer: Sequelize.STRING,
   reference: Sequelize.STRING,
   string: Sequelize.STRING,
   provided: Sequelize.STRING,

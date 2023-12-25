@@ -80,7 +80,6 @@ router.get("/Get_AllFeedbacks", (req, res, next) => {
 router.post("/Create_Feedback", async (req, res, next) => {
     const { 
         feedback, 
-        timer,
         reference,
         string,
         provided,
@@ -92,7 +91,6 @@ router.post("/Create_Feedback", async (req, res, next) => {
     values = [
         {
             feedback: req.body.feedback,
-            timer: req.body.timer,
             reference: req.body.reference,
             string: req.body.string,
             provided: req.body.provided,
@@ -104,7 +102,7 @@ router.post("/Create_Feedback", async (req, res, next) => {
     await models.feedbacks
         .findAll({
             where: {
-                reference_id: values[0].reference_id,
+                reference: values[0].reference,
             },
         })
         .then((data) => {
@@ -159,7 +157,6 @@ router.post("/Update_FeedbackDetail", async (req, res, next) => {
         {
             id: req.body.data.id,
             feedback: req.body.data.feedback,
-            timer: req.body.data.timer,
             reference: req.body.data.reference,
             string: req.body.data.string,
             provided: req.body.data.provided,
@@ -171,7 +168,6 @@ router.post("/Update_FeedbackDetail", async (req, res, next) => {
         .update(
             {
                 feedback: values[0].feedback,
-                timer: values[0].timer,
                 reference: values[0].reference,
                 string: values[0].string,
                 provided: values[0].provided,
