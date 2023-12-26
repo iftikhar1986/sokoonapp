@@ -4,24 +4,19 @@ const models = require("../models/models");
 const sequelize = require("sequelize");
 const Op = sequelize.Op;
 const jwt = require("jsonwebtoken");
-const {
-    accessTokenSecret,
-} = require("../config");
+const {accessTokenSecret,} = require("../config");
 const multer = require("multer");
 
-//Get Single Guide
-router.get('Get_SingleGuide/:g_id", (req, res, next) => {
+router.get("Get_SingleGuide/:g_id", (req, res, next) => {
     const { g_id } = req.params;
-
     models.guides
         .findAll({
             where: {
                 id: g_id,
-            }
+            }, 
         })
-
         .then((data) => {
-            if (data?.length != 0) {
+            if (data?.length !== 0) {
                 console.log("Guide Get Successfully");
                 res.json({
                     data: data,
@@ -33,20 +28,18 @@ router.get('Get_SingleGuide/:g_id", (req, res, next) => {
                 res.json({
                     successful: false,
                     message: "No Guide Found",
-                });
+                }):
             }
         })
-
         .catch(function (err) {
-            console.log("Failed To Get Guide: ", err);
-            res.json({
-                successful: false,
-                message: "Failed To Get Guide: " + err,
-            });
+         res.json({
+            successful: false, 
+             message: "Failed to get Guide" + err, 
+         });
         });
+      
 });
 
-//Get All  guides
 router.get("/Get_AllGuides", (req, res, next) => {
     models.guides
         .findAll({
