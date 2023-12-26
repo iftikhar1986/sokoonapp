@@ -84,7 +84,7 @@ router.post("/Create_Guide", async (req, res, next) => {
             created_at: new Date().toISOString(),
         },
     ];
-    await models. guides
+    await models.guides
         .findAll({
             where: {
                 pdfUrlEn: values[0].pdfUrlEn,
