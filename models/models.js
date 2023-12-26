@@ -102,7 +102,6 @@ const categories = db.connection.define("categories", {
   categorieEn: Sequelize.STRING,
   categorieFr: Sequelize.STRING,
   categorieAr: Sequelize.STRING,
-  is_active: Sequelize.BOOLEAN,
   created_at: Sequelize.DATE,
   updated_at: Sequelize.DATE,
 });
@@ -146,7 +145,7 @@ const newWords = db.connection.define("newWords", {
     primaryKey: true,
     type: Sequelize.INTEGER,
   },
-  timer: Sequelize.STRING,
+  reference: Sequelize.STRING,
   isRead: Sequelize.BOOLEAN,
   word: Sequelize.STRING,
   is_active: Sequelize.BOOLEAN,
@@ -345,16 +344,13 @@ const users = db.connection.define("users", {
   },
   lastLogin: Sequelize.STRING,
   countryISOCode: Sequelize.STRING,
-  isAdmin: Sequelize.BOOLEAN,
   token: Sequelize.STRING,
   emailVerified: Sequelize.BOOLEAN,
-  photoURL: Sequelize.STRING,
   uid: Sequelize.STRING,
   phone: Sequelize.STRING,
   countryCode: Sequelize.STRING,
   name: Sequelize.STRING,
   email: Sequelize.STRING,
-  is_active: Sequelize.BOOLEAN,
   created_at: Sequelize.DATE,
   updated_at: Sequelize.DATE,
 });
@@ -474,7 +470,7 @@ states.belongsTo(countries, { foreignKey: "country_id" });
 
 social_profiles.belongsTo(admins, { foreignKey: "admin_id" });
 
-feedbacks.belongTo(users, {foreignKey: "reference" });
+feedbacks.belongsTo(users, {foreignKey: "reference" });
 
 //Exports Modules
 module.exports.admins = admins;
