@@ -10,7 +10,7 @@ const {
 const multer = require("multer");
 
 //Get Single Guide
-router. get('Get_SingleGuide/:g_id", (req, res, next) => {
+router.get('Get_SingleGuide/:g_id", (req, res, next) => {
     const { g_id } = req.params;
 
     models.guides
