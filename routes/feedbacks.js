@@ -49,12 +49,13 @@ router.get("/Get_SingleFeedback/:fb_id", (req, res, next) => {
 router.get("/Get_AllFeedbacks", (req, res, next) => {
     models.feedbacks
         .findAll(
-	{
+	    {
             order: [["created_at", "DESC"]],
+            include: [
+                { model: models.users, required: false },
+              ]
         },
-      include: [
-        { model: models.users, required: false },
-      ])
+      )
         .then((data) => {
             if (data?.length > 0) {
                 console.log("Get All Feedbacks Successfully");
