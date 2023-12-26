@@ -9,7 +9,8 @@ const {
 } = require("../config");
 const multer = require("multer");
 
-//Get Single Guidesuide/:g_id", (req, res, next) => {
+//Get Single Guide
+router. get('Get_SingleGuide/:g_id", (req, res, next) => {
     const { g_id } = req.params;
 
     models.guides
