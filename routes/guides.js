@@ -28,7 +28,7 @@ router.get("Get_SingleGuide/:g_id", (req, res, next) => {
                 res.json({
                     successful: false,
                     message: "No Guide Found",
-                }):
+                });
             }
         })
         .catch(function (err) {
