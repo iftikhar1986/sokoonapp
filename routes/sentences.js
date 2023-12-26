@@ -83,12 +83,9 @@ router.post("/Create_Sentence", async (req, res, next) => {
 
     values = [
         {
-            catAZAr: req.body.data.catAZAr,
             idWord: req.body.data.idWord,
             arabic: req.body.data.arabic,
             english: req.body.data.english,
-            catAZEn: req.body.data.catAZEn,
-            catAZFr: req.body.data.catAZFr,
             video: req.body.data.video,
             french: req.body.data.french,
             videoUrl: req.body.data.videoUrl,
@@ -154,12 +151,9 @@ router.post("/Update_SentenceDetail", async (req, res, next) => {
     values = [
         {
             id: req.body.data.id,
-            catAZAr: req.body.data.catAZAr,
             idWord: req.body.data.idWord,
             arabic: req.body.data.arabic,
             english: req.body.data.english,
-            catAZEn: req.body.data.catAZEn,
-            catAZFr: req.body.data.catAZFr,
             video: req.body.data.video,
             french: req.body.data.french,
             videoUrl: req.body.data.videoUrl,
@@ -170,12 +164,9 @@ router.post("/Update_SentenceDetail", async (req, res, next) => {
     await models.sentences
         .update(
             {
-                catAZAr:values[0].catAZAr,
                 idWord:values[0].idWord,
                 arabic:values[0].arabic,
                 english:values[0].english,
-                catAZEn:values[0].catAZEn,
-                catAZFr:values[0].catAZFr,
                 video:values[0].video,
                 french:values[0].french,
                 videoUrl:values[0].videoUrl,

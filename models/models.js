@@ -182,12 +182,9 @@ const sentences = db.connection.define("sentences", {
     primaryKey: true,
     type: Sequelize.INTEGER,
   },
-  catAZAr: Sequelize.STRING,
   idWord: Sequelize.STRING,
   arabic: Sequelize.STRING,
   english: Sequelize.STRING,
-  catAZEn: Sequelize.STRING,
-  catAZFr: Sequelize.STRING,
   video: Sequelize.STRING,
   french: Sequelize.STRING,
   videoUrl: Sequelize.STRING,
@@ -370,7 +367,6 @@ const words = db.connection.define("words", {
     type: Sequelize.INTEGER,
   },
     catAZAr : Sequelize.STRING,
-    idWord : Sequelize.STRING,
     arabic : Sequelize.STRING,
     english : Sequelize.STRING,
     catAZEn : Sequelize.STRING,
@@ -459,10 +455,15 @@ states.hasMany(cities, {
 
 admins.hasMany(social_profiles, {
   foreignKey: {
-    fieldName: "candidate_id",
+    fieldName: "admin_id",
   },
 });
 
+users.hasMany(feedbacks, {
+  foreignKey: {
+    fieldName: "reference",
+  },
+});
 
 admins.belongsTo(countries, { foreignKey: "country_id" });
 admins.belongsTo(cities, { foreignKey: "city_id" });
@@ -473,6 +474,7 @@ states.belongsTo(countries, { foreignKey: "country_id" });
 
 social_profiles.belongsTo(admins, { foreignKey: "admin_id" });
 
+feedbacks.belongTo(users, {foreignKey: "reference" });
 
 //Exports Modules
 module.exports.admins = admins;

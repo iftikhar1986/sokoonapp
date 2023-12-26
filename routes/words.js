@@ -81,7 +81,6 @@ router.get("/Get_AllWords", (req, res, next) => {
 router.post("/Create_Word", async (req, res, next) => {
     const { 
         catAZAr,
-        idWord,
         arabic,
         english,
         catAZEn,
@@ -97,7 +96,6 @@ router.post("/Create_Word", async (req, res, next) => {
     values = [
         {
             catAZAr : req.body.data.catAZAr,
-            idWord : req.body.data.idWord,
             arabic : req.body.data.arabic,
             english : req.body.data.english,
             catAZEn : req.body.data.catAZEn,
@@ -169,7 +167,6 @@ router.post("/Update_WordDetail", async (req, res, next) => {
         {
             id: req.body.data.id,
             catAZAr : req.body.data.catAZAr,
-            idWord : req.body.data.idWord,
             arabic : req.body.data.arabic,
             english : req.body.data.english,
             catAZEn : req.body.data.catAZEn,
@@ -186,7 +183,6 @@ router.post("/Update_WordDetail", async (req, res, next) => {
         .update(
             {
                 catAZAr : values[0].catAZAr,
-                idWord : values[0].idWord,
                 arabic : values[0].arabic,
                 english : values[0].english,
                 catAZEn : values[0].catAZEn,
