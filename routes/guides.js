@@ -310,7 +310,7 @@ router.post("/Update_GuidepdfUrlEn", async (req, res, next) => {
             const accessToken = jwt.sign(
                 {
                     successful: true,
-                    message: "Sentence Pic Updated Successfully",
+                    message: "Guide Pic Updated Successfully",
                     data: data[1].dataValues,
                 },
                 accessTokenSecret

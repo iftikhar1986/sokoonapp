@@ -247,7 +247,7 @@ router.post("/ForgetPassword", async (req, res, next) => {
         });
       } else {
         const msg = {
-          from: "admin@sokoon.qa", // Use the email address or domain you verified above
+          from: "admin@sokoon.io", // Use the email address or domain you verified above
           personalizations: [
             {
               to: [
@@ -289,7 +289,7 @@ router.post("/ForgetPassword", async (req, res, next) => {
 //Admin Password Reset
 router.post("/PasswordReset", authenticateJWT, async (req, res, next) => {
 
-  console.log("Password Reset API Calling:", req.body.data);
+  console.log("Password Reset API Calling:", req.body.pr_data);
 
   let hashed_pass = "";
 
