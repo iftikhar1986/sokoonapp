@@ -78,14 +78,14 @@ router.get("/Get_AllNotifications", (req, res, next) => {
 
 //Create Notification
 router.post("/Create_Notification", async (req, res, next) => {
-    const { idWord, type, title, body, messageAr, messageEn, messageFr } = req.body.data;
+    const { idWord, typenoti, title, body, messageAr, messageEn, messageFr } = req.body.data;
 
     values = [
         {
             idWord: req.body.data.idWord,
             title: req.body.data.title,
             body: req.body.data.body,
-            type: req.body.data.type,
+            typenoti: req.body.data.typenoti,
             messageEn: req.body.data.messageEn,
 	    messageAr: req.body.data.messageAr,
             messageFr: req.body.data.messageFr,
@@ -152,7 +152,7 @@ router.post("/Update_NotificationDetail", async (req, res, next) => {
              idWord: req.body.data.idWord,
             title: req.body.data.title,
             body: req.body.data.body,
-            type: req.body.data.type,
+            typenoti: req.body.data.typenoti,
             messageEn: req.body.data.messageEn,
 	    messageAr: req.body.data.messageAr,
             messageFr: req.body.data.messageFr,
@@ -165,7 +165,7 @@ router.post("/Update_NotificationDetail", async (req, res, next) => {
                 idWord: values[0].idWord,
             title: values[0].title,
             body: values[0].body,
-            type: values[0].type,
+            typenoti: values[0].typenoti,
             messageEn: values[0].messageEn,
 	    messageAr: values[0].messageAr,
             messageFr: values[0].messageFr,
