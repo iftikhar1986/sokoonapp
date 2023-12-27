@@ -120,7 +120,7 @@ router.post("/Create_Notification", async (req, res, next) => {
                             );
                             res.json({
                                 successful: true,
-                                message: "Unable to Create New Notification",
+                                message: "Notification Created Successfully",
                                 data: x[0].id,
                             });
                         }
