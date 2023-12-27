@@ -161,7 +161,7 @@ const notifications = db.connection.define("notifications", {
   },
   idWord: Sequelize.STRING,
   messageAr: Sequelize.STRING,
-  tyoenoti: Sequelize.STRING,
+  typenoti: Sequelize.STRING,
   messageEn: Sequelize.STRING,
   title: Sequelize.STRING,
   body: Sequelize.STRING,
