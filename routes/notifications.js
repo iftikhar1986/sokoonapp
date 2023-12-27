@@ -49,7 +49,7 @@ router.get("/Get_SingleNotification/:nt_id", (req, res, next) => {
 router.get("/Get_AllNotifications", (req, res, next) => {
     models.notifications
         .findAll({
-            order: [["created_at", "DESC"]],
+           
         })
         .then((data) => {
             if (data?.length > 0) {
