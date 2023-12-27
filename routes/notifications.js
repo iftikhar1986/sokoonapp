@@ -78,27 +78,24 @@ router.get("/Get_AllNotifications", (req, res, next) => {
 
 //Create Notification
 router.post("/Create_Notification", async (req, res, next) => {
-    const { idWord, messageAr, isRead, messageEn, title, body, isWord, time, messageFr, is_active } = req.body.data;
+    const { idWord, type, title, body, messageAr, messageEn, messageFr } = req.body.data;
 
     values = [
         {
             idWord: req.body.data.idWord,
-            messageAr: req.body.data.messageAr,
-            isRead: req.body.data.isRead,
-            messageEn: req.body.data.messageEn,
             title: req.body.data.title,
             body: req.body.data.body,
-            isWord: req.body.data.isWord,
-            time: req.body.data.time,
+            type: req.body.data.type,
+            messageEn: req.body.data.messageEn,
+	    messageAr: req.body.data.messageAr,
             messageFr: req.body.data.messageFr,
-            is_active: req.body.data.is_active,
             created_at: new Date().toISOString(),
         },
     ];
     await models.notifications
         .findAll({
             where: {
-                idWord: values[0].idWord,
+                title: values[0].title,
             },
         })
         .then((data) => {
@@ -152,32 +149,27 @@ router.post("/Update_NotificationDetail", async (req, res, next) => {
     values = [
         {
             id: req.body.data.id,
-            idWord: req.body.data.idWord,
-            messageAr: req.body.data.messageAr,
-            isRead: req.body.data.isRead,
-            messageEn: req.body.data.messageEn,
+             idWord: req.body.data.idWord,
             title: req.body.data.title,
             body: req.body.data.body,
-            isWord: req.body.data.isWord,
-            time: req.body.data.time,
+            type: req.body.data.type,
+            messageEn: req.body.data.messageEn,
+	    messageAr: req.body.data.messageAr,
             messageFr: req.body.data.messageFr,
-            is_active: req.body.data.is_active,
+            updated_at: new Date().toISOString(),
         },
     ];
     await models.notifications
         .update(
             {
                 idWord: values[0].idWord,
-                messageAr: values[0].messageAr,
-                isRead: values[0].isRead,
-                messageEn: values[0].messageEn,
-                title: values[0].title,
-                body: values[0].body,
-                isWord: values[0].isWord,
-                time: values[0].time,
-                messageFr: values[0].messageFr,
-                is_active: values[0].is_active,
-                updated_at: new Date().toISOString(),
+            title: values[0].title,
+            body: values[0].body,
+            type: values[0].type,
+            messageEn: values[0]..messageEn,
+	    messageAr: values[0].messageAr,
+            messageFr: values[0].messageFr,
+            updated_at: values[0].updated_at,
             },
             {
                 where: {
@@ -214,58 +206,7 @@ router.post("/Update_NotificationDetail", async (req, res, next) => {
         });
 });
 
-//Update Notification Status
-router.post("/Update_NotificationStatus", async (req, res, next) => {
-    console.log("Update Notification Status API calling", req.body.data);
-    values = [
-        {
-            id: req.body.data.id,
-            status: req.body.data.status,
-        },
-    ];
-    await models.notifications
-        .update(
-            {
-                is_active: values[0].status,
-                updated_at: new Date().toISOString(),
-            },
-            {
-                where: {
-                    id: values[0].id,
-                },
-                returning: true,
-                exclude: ["created_at", "updated_at"],
-            }
-        )
-        .then((data) => {
-            const val = {
-                id: values[0].id,
-                is_active: values[0].status,
-            };
-            const accessToken = jwt.sign(
-                {
-                    successful: true,
-                    message: "Notification Status Updated Successfully",
-                    data: val,
-                },
-                accessTokenSecret
-            );
-            console.log("val", val);
-            res.json({
-                successful: true,
-                message: "Successful",
-                data: val,
-                accessToken,
-            });
-        })
-        .catch(function (err) {
-            console.log(err);
-            res.json({
-                message: "Failed" + err,
-                successful: false,
-            });
-        });
-});
+
 
 
 //Delete Single Notification
