@@ -7,6 +7,8 @@ const jwt = require("jsonwebtoken");
 const {
     accessTokenSecret,
 } = require("../config");
+const multer = require("multer");
+
 
 //Get Single Sign
 router.get("/Get_SingleSign/:sgn_id", (req, res, next) => {
@@ -78,15 +80,14 @@ router.get("/Get_AllSigns", (req, res, next) => {
 
 //Create Sign
 router.post("/Create_Sign", async (req, res, next) => {
-    const {namespace, app, path, kind, name, is_active } = req.body.data;
+    const {video, url, category, title, is_active } = req.body.data;
 
     values = [
         {
-            namespace: namespace,
-            app: req.body.app,
-            path: req.body.path,
-            kind: req.body.kind,
-            name: req.body.name,
+            url: req.body.data.url,
+            video: req.body.video,
+            category: req.body.category,
+            title: req.body.title,
             is_active: req.body.is_active,
             created_at: new Date().toISOString(),
         },
@@ -94,7 +95,7 @@ router.post("/Create_Sign", async (req, res, next) => {
     await models.signs
         .findAll({
             where: {
-                name: values[0].name,
+                title: values[0].title,
             },
         })
         .then((data) => {
@@ -148,20 +149,20 @@ router.post("/Update_SignDetail", async (req, res, next) => {
     values = [
         {
             id: req.body.data.id,
-            app: req.body.data.app,
-            path: req.body.data.path,
-            kind: req.body.data.kind,
-            name: req.body.data.name,
-            is_active: req.body.data.is_active,
+            url: req.body.data.url,
+            video: req.body.video,
+            category: req.body.category,
+            title: req.body.title,
+            is_active: req.body.is_active,
         },
     ];
     await models.signs
         .update(
             {
-                app: values[0].app,
-                path: values[0].path,
-                kind: values[0].kind,
-                name: values[0].name,
+                url: values[0].url,
+                video: values[0].video,
+                category: values[0].category,
+                title: values[0].title,
                 is_active: values[0].is_active,
                 updated_at: new Date().toISOString(),
             },
@@ -288,5 +289,78 @@ router.get("/Delete_SingleSign/:id", (req, res, next) => {
       });
   });
 
+//Update Sign Video
+router.post("/Update_SignVid", async (req, res, next) => {
+    console.log("Update Sign Vid API Calling", req.body.data);
+   
+    values = [
+        {
+            id: req.body.data.id,
+            video: req.body.data.video,
+        },
+    ];
+    await models.ads
+        .update(
+            {
+                video: values[0].video,
+                updated_at: new Date().toISOString(),
+            },
+            {
+                where: {
+                    id: values[0].id,
+                },
+                returning: true,
+                plain: true,
+                exclude: ["created_at", "updated_at"],
+            }
+        )
+        .then((data) => {
+            const accessToken = jwt.sign(
+                {
+                    successful: true,
+                    message: "Sign Video Updated Successfully",
+                    data: data[1].dataValues,
+                },
+                accessTokenSecret
+            );
+            res.json({
+                successful: true,
+                message: "Successful",
+                data: data[1].dataValues,
+                accessToken,
+            });
+        })
+        .catch(function (err) {
+            console.log(err);
+            res.json({
+                message: "Failed" + err,
+                successful: false,
+            });
+        });
+});
+
+//Setup Storage Folder
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, "./SignsVideos");
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname);
+    },
+});
+
+//Upload Sign Video
+var upload = multer({ storage: storage }).single("file");
+router.post("/SignVideo", function (req, res) {
+    console.log("Req:", req);
+    upload(req, res, function (err) {
+        if (err instanceof multer.MulterError) {
+            return res.json(err);
+        } else if (err) {
+            return res.json(err);
+        }
+        return res.send(req.file);
+    });
+});
 
 module.exports = router;
