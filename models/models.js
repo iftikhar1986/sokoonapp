@@ -148,7 +148,6 @@ const newWords = db.connection.define("newWords", {
   reference: Sequelize.STRING,
   isRead: Sequelize.BOOLEAN,
   word: Sequelize.STRING,
-  is_active: Sequelize.BOOLEAN,
   created_at: Sequelize.DATE,
   updated_at: Sequelize.DATE,
 });
@@ -459,6 +458,12 @@ users.hasMany(feedbacks, {
   },
 });
 
+users.hasMany(newWords, {
+  foreignKey: {
+    fieldName: "reference",
+  },
+});
+
 admins.belongsTo(countries, { foreignKey: "country_id" });
 admins.belongsTo(cities, { foreignKey: "city_id" });
 admins.belongsTo(states, { foreignKey: "state_id" });
@@ -469,6 +474,7 @@ states.belongsTo(countries, { foreignKey: "country_id" });
 social_profiles.belongsTo(admins, { foreignKey: "admin_id" });
 
 feedbacks.belongsTo(users, {foreignKey: "reference" });
+newWords.belongsTo(users, {foreignKey: "reference" });
 
 //Exports Modules
 module.exports.admins = admins;

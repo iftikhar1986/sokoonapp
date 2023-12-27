@@ -50,6 +50,9 @@ router.get("/Get_AllNewWords", (req, res, next) => {
     models.newWords
         .findAll({
             order: [["created_at", "DESC"]],
+	    include: [
+                { model: models.users, required: false },
+              ]
         })
         .then((data) => {
             if (data?.length > 0) {
@@ -78,14 +81,13 @@ router.get("/Get_AllNewWords", (req, res, next) => {
 
 //Create New Word
 router.post("/Create_NewWord", async (req, res, next) => {
-    const { timer, isRead, word, is_active } = req.body.data;
+    const { reference, isRead, word } = req.body.data;
 
     values = [
         {
-            timer: req.body.timer,
-            isRead: req.body.isRead,
-            word: req.body.word,
-            is_active: req.body.is_active,
+            reference: req.body.data.timer,
+            isRead: req.body.data.isRead,
+            word: req.body.data.word,
             created_at: new Date().toISOString(),
         },
     ];
@@ -97,10 +99,10 @@ router.post("/Create_NewWord", async (req, res, next) => {
         })
         .then((data) => {
             if (data?.length !== 0) {
-                console.log("New Word already exists");
+                console.log("New Word Suggestion already exists");
                 res.json({
                     successful: false,
-                    message: "New Word already exists",
+                    message: "New Word Suggestion already exists",
                 });
             } else {
                 models.newWords
@@ -110,23 +112,23 @@ router.post("/Create_NewWord", async (req, res, next) => {
                             const accessToken = jwt.sign(
                                 {
                                     successful: true,
-                                    message: "New Word Created Successfully",
+                                    message: "New Word Suggested Successfully",
                                     data: x[0],
                                 },
                                 accessTokenSecret
                             );
                             res.json({
                                 successful: true,
-                                message: "Unable to Create New Word",
+                                message: "Unable to Suggest New Word",
                                 data: x[0].id,
                             });
                         }
                     })
                     .catch(function (err) {
-                        console.log("Failed to Create New Word: ", err);
+                        console.log("Failed to Suggest New Word: ", err);
                         res.json({
                             successful: false,
-                            message: "Failed to Create New Word: " + err,
+                            message: "Failed to Suggest New Word: " + err,
                         });
                     });
             }
@@ -146,19 +148,17 @@ router.post("/Update_NewWordDetail", async (req, res, next) => {
     values = [
         {
             id: req.body.data.id,
-            timer: req.body.data.timer,
+            reference: req.body.data.reference,
             isRead: req.body.data.isRead,
             word: req.body.data.word,
-            is_active: req.body.data.is_active,
         },
     ];
     await models.newWords
         .update(
             {
-                timer: values[0].timer,
+                reference: values[0].reference,
                 isRead: values[0].isRead,
                 word: values[0].word,
-                is_active: values[0].is_active,
                 updated_at: new Date().toISOString(),
             },
             {
@@ -196,58 +196,6 @@ router.post("/Update_NewWordDetail", async (req, res, next) => {
         });
 });
 
-//Update New Word Status
-router.post("/Update_NewWordstatus", async (req, res, next) => {
-    console.log("Update newWord Status API calling", req.body.data);
-    values = [
-        {
-            id: req.body.data.id,
-            status: req.body.data.status,
-        },
-    ];
-    await models.newWords
-        .update(
-            {
-                is_active: values[0].status,
-                updated_at: new Date().toISOString(),
-            },
-            {
-                where: {
-                    id: values[0].id,
-                },
-                returning: true,
-                exclude: ["created_at", "updated_at"],
-            }
-        )
-        .then((data) => {
-            const val = {
-                id: values[0].id,
-                is_active: values[0].status,
-            };
-            const accessToken = jwt.sign(
-                {
-                    successful: true,
-                    message: "newWord Status Updated Successfully",
-                    data: val,
-                },
-                accessTokenSecret
-            );
-            console.log("val", val);
-            res.json({
-                successful: true,
-                message: "Successful",
-                data: val,
-                accessToken,
-            });
-        })
-        .catch(function (err) {
-            console.log(err);
-            res.json({
-                message: "Failed" + err,
-                successful: false,
-            });
-        });
-});
 
 //Delete Single New Word
 router.get("/Delete_SingleNewWord/:id", (req, res, next) => {
