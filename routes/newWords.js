@@ -49,7 +49,7 @@ router.get("/Get_SingleNewWord/:nw_id", (req, res, next) => {
 router.get("/Get_AllNewWords", (req, res, next) => {
     models.newWords
         .findAll({
-            order: [["created_at", "DESC"]],
+           
 	    include: [
                 { model: models.users, required: false },
               ]

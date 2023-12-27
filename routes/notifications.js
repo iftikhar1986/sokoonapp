@@ -166,7 +166,7 @@ router.post("/Update_NotificationDetail", async (req, res, next) => {
             title: values[0].title,
             body: values[0].body,
             type: values[0].type,
-            messageEn: values[0]..messageEn,
+            messageEn: values[0].messageEn,
 	    messageAr: values[0].messageAr,
             messageFr: values[0].messageFr,
             updated_at: values[0].updated_at,
