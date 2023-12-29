@@ -85,10 +85,10 @@ router.post("/Create_Sign", async (req, res, next) => {
     values = [
         {
             url: req.body.data.url,
-            video: req.body.video,
-            category: req.body.category,
-            title: req.body.title,
-            is_active: req.body.is_active,
+            video: req.body.data.video,
+            category: req.body.data.category,
+            title: req.body.data.title,
+            is_active: req.body.data.is_active,
             created_at: new Date().toISOString(),
         },
     ];
@@ -113,14 +113,14 @@ router.post("/Create_Sign", async (req, res, next) => {
                             const accessToken = jwt.sign(
                                 {
                                     successful: true,
-                                    message: "Sign Created Successfully",
+                                    message: "Learn Sign Created Successfully",
                                     data: x[0],
                                 },
                                 accessTokenSecret
                             );
                             res.json({
                                 successful: true,
-                                message: "Unable to Create New Sign",
+                                message: "Learn Sign Created Successfully",
                                 data: x[0].id,
                             });
                         }
@@ -150,10 +150,10 @@ router.post("/Update_SignDetail", async (req, res, next) => {
         {
             id: req.body.data.id,
             url: req.body.data.url,
-            video: req.body.video,
-            category: req.body.category,
-            title: req.body.title,
-            is_active: req.body.is_active,
+            video: req.body.data.video,
+            category: req.body.data.category,
+            title: req.body.data.title,
+            is_active: req.body.data.is_active,
         },
     ];
     await models.signs
