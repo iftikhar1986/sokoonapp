@@ -122,7 +122,7 @@ router.post("/Create_Sentence", async (req, res, next) => {
                             );
                             res.json({
                                 successful: true,
-                                message: "Unable to Create New Sentence",
+                                message: "Sentence Created Successfully",
                                 data: x[0].id,
                             });
                         }

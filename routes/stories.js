@@ -122,7 +122,7 @@ router.post("/Create_Story", async (req, res, next) => {
                             );
                             res.json({
                                 successful: true,
-                                message: "Unable to Create New Story",
+                                message:  "Story Created Successfully",
                                 data: x[0].id,
                             });
                         }

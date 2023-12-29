@@ -119,7 +119,7 @@ router.post("/Create_UserGuide", async (req, res, next) => {
                             );
                             res.json({
                                 successful: true,
-                                message: "Unable to Create New UserGuide",
+                                message: "UserGuide Created Successfully",
                                 data: x[0].id,
                             });
                         }

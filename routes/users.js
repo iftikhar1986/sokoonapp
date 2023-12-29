@@ -132,7 +132,7 @@ router.post("/Create_User", async (req, res, next) => {
                             );
                             res.json({
                                 successful: true,
-                                message: "Unable to Create New User",
+                                message: "User Created Successfully",
                                 data: x[0].id,
                             });
                         }

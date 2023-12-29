@@ -127,7 +127,7 @@ router.post("/Create_Setting", async (req, res, next) => {
                             );
                             res.json({
                                 successful: true,
-                                message: "Unable to Create New Setting",
+                                message: "Setting Created Successfully",
                                 data: x[0].id,
                             });
                         }

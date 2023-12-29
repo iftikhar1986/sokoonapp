@@ -112,7 +112,7 @@ router.post("/Create_Guide", async (req, res, next) => {
                             );
                             res.json({
                                 successful: true,
-                                message: "Unable to Create New Guide",
+                                message: "Guide Created Successfully",
                                 data: x[0].id,
                             });
                         }
