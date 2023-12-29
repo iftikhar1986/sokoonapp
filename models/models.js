@@ -248,6 +248,15 @@ const settings = db.connection.define("sokoonDescription", {
   descriptionEn: Sequelize.STRING,
   descriptionAr: Sequelize.STRING,
   updated_at: Sequelize.DATE,
+  image1: Sequelize.STRING,
+  image2: Sequelize.STRING,
+  image3: Sequelize.STRING,
+  image4: Sequelize.STRING,
+  url1: Sequelize.STRING,
+  url2: Sequelize.STRING,
+  url3: Sequelize.STRING,
+  url4: Sequelize.STRING,
+
 });
 
 const signs = db.connection.define("signs", {
