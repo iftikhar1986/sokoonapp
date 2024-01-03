@@ -359,7 +359,7 @@ const users = db.connection.define("users", {
   updated_at: Sequelize.DATE,
 });
 
-const favorites = db.connection.define("favourites", {
+const favourites = db.connection.define("favourites", {
   id: {
     allowNull: false,
     autoIncrement: true,
