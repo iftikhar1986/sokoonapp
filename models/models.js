@@ -359,6 +359,18 @@ const users = db.connection.define("users", {
   updated_at: Sequelize.DATE,
 });
 
+const users = db.connection.define("favourites", {
+  id: {
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true,
+    type: Sequelize.INTEGER,
+  },
+  user_id: Sequelize.STRING,
+  video_url: Sequelize.STRING,
+});
+
+
 const words = db.connection.define("words", {
   id: {
     allowNull: false,
@@ -465,6 +477,12 @@ users.hasMany(feedbacks, {
   },
 });
 
+users.hasMany(favourites, {
+  foreignKey: {
+    fieldName: "user_id",
+  },
+});
+
 users.hasMany(newWords, {
   foreignKey: {
     fieldName: "reference",
@@ -481,6 +499,7 @@ states.belongsTo(countries, { foreignKey: "country_id" });
 social_profiles.belongsTo(admins, { foreignKey: "admin_id" });
 
 feedbacks.belongsTo(users, {foreignKey: "reference" });
+favourites.belongsTo(users, {foreignKey: "user_id" });
 newWords.belongsTo(users, {foreignKey: "reference" });
 
 //Exports Modules
@@ -497,6 +516,7 @@ module.exports.guides = guides;
 module.exports.newWords = newWords;
 module.exports.notifications = notifications;
 module.exports.feedbacks = feedbacks;
+module.exports.favourites = favourites;
 module.exports.sentences = sentences;
 // module.exports.sentences2 = sentences2;
 // module.exports.sentences3 = sentences3;
