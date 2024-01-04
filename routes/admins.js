@@ -122,7 +122,7 @@ router.post("/Register", async (req, res, next) => {
 router.post("/VerifyEmail", (req, res, next) => {
   values = [
     {
-      Email: req.body.data1.new_email,
+      Email: req.body.data.new_email,
     },
   ];
 
@@ -172,8 +172,8 @@ router.post("/Login", async (req, res, next) => {
         email: values[0].email,
       },
     })
-    .then((data) => {
-        if (data?.length <= 0) {
+    .then((response) => {
+        if (response?.length == 0) {
           console.log("Email or Password incorrect");
           res.json({
             successful: false,
@@ -181,18 +181,17 @@ router.post("/Login", async (req, res, next) => {
           });
         } else {
           let password_check = bcrypt.compare(
-	
-            req.body.l_data.password,
-            data[0].password
+            req.body.l_data?.password,
+            response[0]?.password
           );
-		 console.log("ldata password",  req.body.l_data.password);
+          console.log("ldata password",  req.body.l_data.password);
           console.log("response password",  response[0].password);
           if (password_check) {
             const accessToken = jwt.sign(
               {
                 successful: true,
                 message: "Admin Login Successfully.",
-                data: data[0],
+                data: response[0],
               },
               accessTokenSecret
             );
@@ -256,7 +255,7 @@ router.post("/ForgetPassword", async (req, res, next) => {
         });
       } else {
         const msg = {
-          from: "admin@sokoon.io", // Use the email address or domain you verified above
+          from: "admin@sokoon.qa", // Use the email address or domain you verified above
           personalizations: [
             {
               to: [
@@ -298,7 +297,7 @@ router.post("/ForgetPassword", async (req, res, next) => {
 //Admin Password Reset
 router.post("/PasswordReset", authenticateJWT, async (req, res, next) => {
 
-  console.log("Password Reset API Calling:", req.body.pr_data);
+  console.log("Password Reset API Calling:", req.body.data);
 
   let hashed_pass = "";
 
