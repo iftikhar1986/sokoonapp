@@ -168,11 +168,11 @@ router.post("/Login", async (req, res, next) => {
 
     const response = await models.admins.findAll({
       where: {
-        email: values.email,
+        email: values[0].email,
       },
     });
 
-    if (!response || response[0].length === 0 || !response[0]?.admins || !response[0]?.admins.password) {
+    if (response[0].length === 0 || !response[0]?.admins.password) {
       console.log("Email or Password incorrect");
       return res.json({
         successful: false,
