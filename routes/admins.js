@@ -180,9 +180,9 @@ router.post("/Login", async (req, res, next) => {
             message: "Email or Password incorrect",
           });
         } else {
-          let password_check = bcrypt.compare(
+          let password_check = await bcrypt.compare(
            values[0].email,
-            response.admins?.password
+            response[0].admins?.password
           );
           console.log("ldata password",  req.body.l_data.password);
           console.log("response password",  response.admins);
