@@ -76,6 +76,44 @@ router.get("/Get_AllUsers", (req, res, next) => {
         });
 });
 
+//Admin Email Verify
+router.post("/VerifyEmail", (req, res, next) => {
+  values = [
+    {
+      Email: req.body.data.new_email,
+    },
+  ];
+
+  models.admins
+    .findAll({
+      where: {
+        Email: values[0].Email,
+      },
+    })
+    .then((data) => {
+      console.log(data?.length);
+
+      if (data?.length != 0) {
+        console.log("Email Already Exists");
+        res.json({
+          Successful: false,
+          data: data,
+        });
+      } else {
+        res.json({
+          Successful: false,
+        });
+      }
+    })
+    .catch(function (err) {
+      console.log("Error at find", err);
+      res.json({
+        Message: "Failed" + err,
+        Successful: false,
+      });
+    });
+});
+
 //Create User
 router.post("/Create_User", async (req, res, next) => {
     const {
