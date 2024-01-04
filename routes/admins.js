@@ -172,8 +172,8 @@ router.post("/Login", async (req, res, next) => {
         email: values[0].email,
       },
     })
-    .then((response) => {
-        if (response?.length == 0) {
+    .then((data) => {
+        if (data?.length == 0) {
           console.log("Email or Password incorrect");
           res.json({
             successful: false,
@@ -182,14 +182,14 @@ router.post("/Login", async (req, res, next) => {
         } else {
           let password_check = bcrypt.compare(
             req.body.l_data.password,
-            response[0].password
+            data[0].password
           );
           if (password_check) {
             const accessToken = jwt.sign(
               {
                 successful: true,
                 message: "Admin Login Successfully.",
-                data: response[0],
+                data: data[0],
               },
               accessTokenSecret
             );
