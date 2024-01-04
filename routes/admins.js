@@ -158,61 +158,67 @@ router.post("/VerifyEmail", (req, res, next) => {
 
 //Admin Login
 router.post("/Login", async (req, res, next) => {
-  try {
-    const values = {
+  values = [
+    {
       email: req.body.l_data.email,
       password: req.body.l_data.password,
       is_login: true,
       last_login: new Date().toISOString(),
-    };
-
-    const response = await models.admins.findAll({
+    },
+  ];
+  await models.admins
+    .findAll({
       where: {
         email: values[0].email,
       },
-    });
-
-    if (response[0].length === 0 || !response[0]?.admins.password) {
-      console.log("Email or Password incorrect");
-      return res.json({
-        successful: false,
-        message: "Email or Password incorrect",
+    })
+    .then((response) => {
+        if (response?.length == 0) {
+          console.log("Email or Password incorrect");
+          res.json({
+            successful: false,
+            message: "Email or Password incorrect",
+          });
+        } else {
+          let password_check = bcrypt.compare(
+            req.body.l_data?.password,
+            response[0]?.password
+          );
+          console.log("ldata password",  req.body.l_data.password);
+          console.log("response password",  response[0].password);
+          if (password_check) {
+            const accessToken = jwt.sign(
+              {
+                successful: true,
+                message: "Admin Login Successfully.",
+                data: response[0],
+              },
+              accessTokenSecret
+            );
+            res.json({
+              successful: true,
+              message: "Admin Login Successfully.",
+              data: data[0],
+              accessToken: accessToken,
+            });
+          }else{
+ 		 console.log("Password incorrect");
+          res.json({
+            successful: false,
+            message: "Password incorrect",
+          });
+	  }
+        }
+      })
+      .catch(function (err) {
+        console.log("Request Data is Empty: ", err);
+        res.json({
+          successful: false,
+          message: "Request Data is Empty: " + err,
+        });
       });
-    }
+  });
 
-   if( values[0].password ===  response[0]?.admins.password){
-      const accessToken = jwt.sign(
-        {
-          successful: true,
-          message: "Admin Login Successfully.",
-          data: response[0],
-        },
-        accessTokenSecret
-      );
-
-      return res.json({
-        successful: true,
-        message: "Admin Login Successfully.",
-        data: response[0],
-        accessToken: accessToken,
-      });
-    } else {
-      console.log("Password incorrect");
-      return res.json({
-        successful: false,
-        message: "Password incorrect",
-      });
-    }
-  } catch (err) {
-    console.log("Error:", err);
-    return res.json({
-      successful: false,
-      message: "An error occurred: " + err,
-    });
-  }
-});
-
-   
 
 
 //Admin Get Auth
