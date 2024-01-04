@@ -182,10 +182,10 @@ router.post("/Login", async (req, res, next) => {
         } else {
           let password_check = bcrypt.compare(
             req.body.l_data?.password,
-            response[0]?.password
+            response?.password
           );
           console.log("ldata password",  req.body.l_data.password);
-          console.log("response password",  response[0].password);
+          console.log("response password",  response);
           if (password_check) {
             const accessToken = jwt.sign(
               {
