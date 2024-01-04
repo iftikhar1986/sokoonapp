@@ -173,7 +173,7 @@ router.post("/Login", async (req, res, next) => {
       },
     })
     .then((data) => {
-        if (data?.length == 0) {
+        if (data?.length <= 0) {
           console.log("Email or Password incorrect");
           res.json({
             successful: false,
@@ -181,6 +181,8 @@ router.post("/Login", async (req, res, next) => {
           });
         } else {
           let password_check = bcrypt.compare(
+	 console.log("ldata password",  req.body.l_data.password);
+          console.log("response password",  response[0].password);
             req.body.l_data.password,
             data[0].password
           );
