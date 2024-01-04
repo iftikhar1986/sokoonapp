@@ -180,14 +180,7 @@ router.post("/Login", async (req, res, next) => {
       });
     }
 
-    const password_check = await bcrypt.compare(
-      values.password,
-      response[0].admins.password
-    );
-
-    console.log("Request Data is Empty");
-
-    if (password_check) {
+   if( values.password ===  response[0].admins.password){
       const accessToken = jwt.sign(
         {
           successful: true,
