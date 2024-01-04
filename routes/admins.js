@@ -172,7 +172,7 @@ router.post("/Login", async (req, res, next) => {
       },
     });
 
-    if (!response || response.length === 0 || !response[0]?.admins || !response[0].admins.password) {
+    if (!response || response[0].length === 0 || !response[0]?.admins || !response[0]?.admins.password) {
       console.log("Email or Password incorrect");
       return res.json({
         successful: false,
@@ -180,7 +180,7 @@ router.post("/Login", async (req, res, next) => {
       });
     }
 
-   if( values.password ===  response[0].admins.password){
+   if( values.password ===  response[0]?.admins.password){
       const accessToken = jwt.sign(
         {
           successful: true,
